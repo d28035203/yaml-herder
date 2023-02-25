@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-api
+  template:
+    metadata:
+      labels:
+        app: demo-api
+    spec:
+      containers:
+        - name: api
+          image: hashicorp/http-echo:1.0
+          args: ["-text=yaml-herder-ok"]
+          ports:
+            - containerPort: 5678
+          envFrom:
+            - configMapRef:
+                name: demo-api-config
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5678
+          resources:
+            requests: { cpu: 50m, memory: 64Mi }
+            limits: { cpu: 200m, memory: 128Mi }
