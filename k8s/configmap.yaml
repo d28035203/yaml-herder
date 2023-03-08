@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  namespace: yaml-herder
   name: demo-api-config
 data:
   APP_ENV: staging

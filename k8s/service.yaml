@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: yaml-herder
   name: demo-api
 spec:
   selector: { app: demo-api }
